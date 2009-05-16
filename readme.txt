@@ -28,7 +28,7 @@ If you have created your own language pack, or have an update of an existing one
 * 0.2.6
 	* Initial upload
   
-More info you can see on the [plagin page](http://simplelib.co.cc/?p=128)
+More info you can see on the [plugin page](http://simplelib.co.cc/?p=128)
 
 == Installation ==
 
