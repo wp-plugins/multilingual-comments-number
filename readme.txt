@@ -48,7 +48,7 @@ All HTML tags are saved. Only text will be translated.
 
 For example: __comments-number__ send to result page this code `<a href="ext-comments-editor.php">21 comments</a>`
 
-resulting string after __multilingual-comments-number__ filtering for ru_RU: `<a href="ext-comments-editor.php">21 комментарий</a>`
+resulting string after __multilingual-comments-number__ filtering for ru_RU: `<a href="ext-comments-editor.php">21 РєРѕРјРјРµРЅС‚Р°СЂРёР№</a>`
 
 == Screenshots ==
 
