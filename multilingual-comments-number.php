@@ -3,7 +3,7 @@
 Plugin Name: multilingual-comments-number
 Plugin URI: http://simplelib.co.cc/?p=128
 Description: Adds correct multilingual comments numbering to wordpress blog. Visit <a href="http://simplelib.co.cc/">SimpleLib blog</a> for more details.
-Version: 0.2.6
+Version: 0.2.7
 Author: minimus
 Author URI: http://blogovod.co.cc
 */
@@ -37,39 +37,8 @@ if (!class_exists('MultilingualCommentsNumber')) {
 			add_filter( 'comments_number', array(&$this, 'commentsNumber'), 8, 2);
 		}
 		
-		function getText( $htmlString ) {
-			$search = array ("'<script[^>]*?>.*?</script>'si",  
-											 "'<[\/\!]*?[^<>]*?>'si", 
-                 			 "'([\r\n])[\s]+'",
-                 			 "'&(quot|#34);'i",
-                 			 "'&(amp|#38);'i",
-                 			 "'&(lt|#60);'i",
-                 			 "'&(gt|#62);'i",
-                 			 "'&(nbsp|#160);'i",
-                 			 "'&(iexcl|#161);'i",
-                 			 "'&(cent|#162);'i",
-                 			 "'&(pound|#163);'i",
-                 			 "'&(copy|#169);'i",
-                 			 "'&#(\d+);'e");
-
-			$replace = array ("",
-      			            "",
-            			      "\\1",
-                  			"\"",
-                  			"&",
-                  			"<",
-                  			">",
-                  			" ",
-                  			chr(161),
-                  			chr(162),
-                  			chr(163),
-                  			chr(169),
-                  			"chr(\\1)");
-			return preg_replace( $search, $replace, $htmlString );
-		}
-		
 		function commentsNumber( $output, $number ) {
-			$text = $this->getText( $output );
+			$text = strip_tags( $output );
 			$filterNeeded = (strlen( $text ) != strspn( $text, "1234567890" )); 
 			
 			if ( true === $filterNeeded ) {

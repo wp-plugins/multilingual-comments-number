@@ -4,7 +4,7 @@ Donate link: http://simplelib.co.cc/
 Tags: comments, comments_number
 Requires at least: 2.7
 Tested up to: 2.7.1
-Stable tag: 0.2.6
+Stable tag: 0.2.7
 
 This plugin corrects output of comments_number for languages having more than one form of plurals (All Slavic languages for example).
 
@@ -20,6 +20,7 @@ Available languages:
   * Polish
   * Belorussian
   * Ukrainian
+  * Czech
 
 If you have created your own language pack, or have an update of an existing one, you can send __.po__ and __.mo files__ to me so that I can bundle it into __multilingual-comments-number__.
 
@@ -27,6 +28,9 @@ If you have created your own language pack, or have an update of an existing one
 
 * 0.2.6
 	* Initial upload
+* 0.2.7
+	* Code optimisation
+	* Czech language added
   
 More info you can see on the [plugin page](http://simplelib.co.cc/?p=128)
 
