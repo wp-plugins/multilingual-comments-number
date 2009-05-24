@@ -3,8 +3,8 @@ Contributors: minimus
 Donate link: http://simplelib.co.cc/
 Tags: comments, comments_number
 Requires at least: 2.7
-Tested up to: 2.7.1
-Stable tag: 0.2.7
+Tested up to: 2.8
+Stable tag: 0.2.8
 
 This plugin corrects output of comments_number for languages having more than one form of plurals (All Slavic languages for example).
 
@@ -31,6 +31,9 @@ If you have created your own language pack, or have an update of an existing one
 * 0.2.7
 	* Code optimisation
 	* Czech language added
+* 0.2.8
+	* code optimisation
+	* Wordpress 2.8 compatibility checked
   
 More info you can see on the [plugin page](http://simplelib.co.cc/?p=128)
 

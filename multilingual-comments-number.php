@@ -3,7 +3,7 @@
 Plugin Name: multilingual-comments-number
 Plugin URI: http://simplelib.co.cc/?p=128
 Description: Adds correct multilingual comments numbering to wordpress blog. Visit <a href="http://simplelib.co.cc/">SimpleLib blog</a> for more details.
-Version: 0.2.7
+Version: 0.2.8
 Author: minimus
 Author URI: http://blogovod.co.cc
 */
@@ -34,15 +34,15 @@ if (!class_exists('MultilingualCommentsNumber')) {
 				load_plugin_textdomain( 'multilingual-comments-number', 'wp-content/plugins/' . $plugin_dir, $plugin_dir );
 			
 			//Actions and Filters
-			add_filter( 'comments_number', array(&$this, 'commentsNumber'), 8, 2);
+			add_filter( 'comments_number', array( &$this, 'commentsNumber' ), 8, 2);
 		}
 		
 		function commentsNumber( $output, $number ) {
 			$text = strip_tags( $output );
-			$filterNeeded = (strlen( $text ) != strspn( $text, "1234567890" )); 
+			$filterNeeded = !ctype_digit( $text ); 
 			
-			if ( true === $filterNeeded ) {
-				switch ($number) {
+			if ( $filterNeeded ) {
+				switch ( $number ) {
 					case 0: $mcnOutput = str_replace( $text, __( 'No Comments', 'multilingual-comments-number' ), $output ); 
 					break;
 				
