@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: multilingual-comments-number\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-14 18:43+0200\n"
+"POT-Creation-Date: 2009-05-17 15:02+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Константин Леонов <rublezoid@gmail.com>\n"
 "Language-Team: minimus <minimus@blogovod.co.cc>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: multilingual-comments-number.php:78
+#: multilingual-comments-number.php:46
 msgid "No Comments"
 msgstr "Brak komentarzy"
 
-#: multilingual-comments-number.php:81
+#: multilingual-comments-number.php:49
 msgid "One Comment"
 msgstr "Jeden komentarz"
 
-#: multilingual-comments-number.php:84
+#: multilingual-comments-number.php:52
 #, php-format
 msgid "%d Comment"
 msgid_plural "%d Comments"

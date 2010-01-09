@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: multilingual-comments-number\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-14 18:20+0200\n"
+"POT-Creation-Date: 2010-01-09 15:26+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Константин Леонов <rublezoid@gmail.com>\n"
 "Language-Team: minimus <minimus@blogovod.co.cc>\n"
@@ -17,15 +17,51 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: multilingual-comments-number.php:78
-msgid "No Comments"
+#: multilingual-comments-number.php:63
+msgid "There are no comments"
 msgstr "Нет комментариев"
 
-#: multilingual-comments-number.php:81
+#: multilingual-comments-number.php:65
 msgid "One Comment"
 msgstr "Один комментарий"
 
-#: multilingual-comments-number.php:84
+#: multilingual-comments-number.php:71
+msgid "Comments Numbering"
+msgstr "Нумерация комментариев"
+
+#: multilingual-comments-number.php:81
+msgid "General Settings"
+msgstr "Основные параметры"
+
+#: multilingual-comments-number.php:86
+msgid "Define empty comments string"
+msgstr "Строка отсутствия комментариев"
+
+#: multilingual-comments-number.php:87
+msgid "This is phrase for posts without comments."
+msgstr "Эта строка будет выводится для статей не имеющих комментариев."
+
+#: multilingual-comments-number.php:93
+msgid "Define one comment string"
+msgstr "Строка одного комментария"
+
+#: multilingual-comments-number.php:94
+msgid "This is phrase for posts with one comment."
+msgstr "Эта строка будет выводиться для статей имеющих один комментарий."
+
+#: multilingual-comments-number.php:110
+msgid "Multilingual Comments Number Settings Updated."
+msgstr "Параметры нумерации количества комментариев сохранены."
+
+#: multilingual-comments-number.php:117
+msgid "Multilingual Comments Number Settings"
+msgstr "Параметры нумерации количества комментариев"
+
+#: multilingual-comments-number.php:202
+msgid "Update Settings"
+msgstr "Сохранить параметры"
+
+#: multilingual-comments-number.php:222
 #, php-format
 msgid "%d Comment"
 msgid_plural "%d Comments"
@@ -33,8 +69,8 @@ msgstr[0] "%d комментарий"
 msgstr[1] "%d комментария"
 msgstr[2] "%d комментариев"
 
-#~ msgid "Leave a Comment"
-#~ msgstr "Оставьте комментарий"
+#~ msgid "No Comments"
+#~ msgstr "Нет комментариев"
 #~ msgid "Special Text Boxes"
 #~ msgstr "Подсветка текста"
 #~ msgid "Basic Settings"
@@ -74,8 +110,6 @@ msgstr[2] "%d комментариев"
 #~ msgstr ""
 #~ "Этот параметр определяет промежуток между нижним краем блока специального "
 #~ "текста и текстом (елементом) расположенным ниже."
-#~ msgid "Extended Settings"
-#~ msgstr "Дополнительные параметры"
 #~ msgid ""
 #~ "Parameters below add elements of CSS3 standard to Style Sheet. Not all "
 #~ "browsers can interpret this elements properly, but including this "
@@ -102,12 +136,8 @@ msgstr[2] "%d комментариев"
 #~ msgstr "Разрешить использование теней текста?"
 #~ msgid "Selecting \"No\" will disable Special Text Boxes text shadow."
 #~ msgstr "Выбрав \"Нет\", Вы запретите прорисовку теней текста. "
-#~ msgid "Special Text Boxes Settings Updated."
-#~ msgstr "Параметры подсветки специального текста сохранены."
 #~ msgid "Special Text Boxes Settings"
 #~ msgstr "Параметры подсветки специального текста"
-#~ msgid "Update Settings"
-#~ msgstr "Сохранить параметры"
 #~ msgid "Solid"
 #~ msgstr "Сплошная линия"
 #~ msgid "Dashed"
