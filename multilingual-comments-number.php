@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Multilingual Comments Number
-Plugin URI: http://simplelib.co.cc/?p=128
-Description: Adds correct multilingual comments numbering to wordpress blog. Visit <a href="http://simplelib.co.cc/">SimpleLib blog</a> for more details.
-Version: 1.0.10
+Plugin URI: http://www.simplelib.com/?p=128
+Description: Adds correct multilingual comments numbering to wordpress blog. Visit <a href="http://www.simplelib.com/">SimpleLib blog</a> for more details.
+Version: 2.0.13
 Author: minimus
-Author URI: http://blogovod.co.cc
+Author URI: http://blogcoding.ru
 */
 
 /*  Copyright 2009, minimus  (email : minimus.blogovod@gmail.com)
@@ -28,15 +28,18 @@ Author URI: http://blogovod.co.cc
 if (!class_exists('MultilingualCommentsNumber')) {
 	class MultilingualCommentsNumber {
 		var $adminOptionsName = "MultilingualCommentsNumberAdminOptions";
-		var $mcnInitOptions = array('commentStringZero' => '', 'commentStringOne' => '');
-		function MultilingualCommentsNumber() {
+		var $mcnInitOptions;
+		function __construct() {
 			//load language
 			$plugin_dir = basename( dirname( __FILE__ ) );
 			if ( function_exists( 'load_plugin_textdomain' ) ) 
-				load_plugin_textdomain( 'multilingual-comments-number', PLUGINDIR . $plugin_dir, $plugin_dir );
+				load_plugin_textdomain( 'multilingual-comments-number', false, $plugin_dir );
+			
+			$this->mcnInitOptions = array('commentStringZero' => __( 'There are no comments', 'multilingual-comments-number' ),
+																		'commentStringOne' => __( 'One Comment', 'multilingual-comments-number' ));
 			
 			//Actions and Filters
-			add_action('admin_menu', array(&$this, 'onAdminPage'));
+			add_action('admin_init', array(&$this, 'initSettings'));
 			add_action('activate_multilingual-comments-number/multilingual-comments-number.php',  array(&$this, 'onActivate'));
 			add_action('deactivate_multilingual-comments-number/multilingual-comments-number.php',  array(&$this, 'onDeactivate'));
 			add_filter( 'comments_number', array( &$this, 'commentsNumber' ), 8, 2);
@@ -44,148 +47,58 @@ if (!class_exists('MultilingualCommentsNumber')) {
 		
 		function onActivate() {
 			$mcnAdminOptions = $this->getOptions();
-			update_option($this->adminOptionsName, $mcnAdminOptions);
+			update_option('mcnZeroString', $mcnAdminOptions['commentStringZero']);
+			update_option('mcnOneString', $mcnAdminOptions['commentStringOne']);
 		}
 		
 		function onDeactivate() {
-			delete_option($this->adminOptionsName);
+			delete_option('mcnZeroString');
+			delete_option('mcnOneString');
 		}
 		
 		function getOptions() {
+			$zeroString = get_option('mcnZeroString', '');
+			$oneString = get_option('mcnOneString', '');
+			
 			$mcnAdminOptions = $this->mcnInitOptions;
-			$mcnOptions = get_option($this->adminOptionsName);
-			if (!empty($mcnOptions)) {
-				foreach ($mcnOptions as $key => $option) {
-					$mcnAdminOptions[$key] = $option;
-				}
-			}
-			if($mcnAdminOptions['commentStringZero'] === '')
-				$mcnAdminOptions['commentStringZero'] = __( 'There are no comments', 'multilingual-comments-number' );
-			if($mcnAdminOptions['commentStringOne'] === '')
-				$mcnAdminOptions['commentStringOne'] = __( 'One Comment', 'multilingual-comments-number' );
+			if ($zeroString !== '') $mcnAdminOptions['commentStringZero'] = $zeroString;
+			if ($oneString !== '') $mcnAdminOptions['commentStringOne'] = $oneString;
+			
+			if (get_option($this->adminOptionsName, false)) $mcnAdminOptions = $this->updateOldOptions();
+			
 			return $mcnAdminOptions;
 		}
 		
-		function onAdminPage() {
-			if (function_exists('add_options_page')) {
-				$plugin_page = add_options_page(__('Comments Numbering', 'multilingual-comments-number'), __('Comments Numbering', 'multilingual-comments-number'), 8, basename(__FILE__), array(&$this, 'printAdminPage'));
-				/*add_action('admin_print_styles-'.$plugin_page, array(&$this, 'adminHeaderStyles'));
-				add_action('admin_print_scripts-'.$plugin_page, array(&$this, 'adminHeaderScripts'));*/
-			}
+		function updateOldOptions() {
+			$options = get_option($this->adminOptionsName, '');
+			delete_option($this->adminOptionsName);
+			return $options;
 		}
 		
-		function printAdminPage() {
-			$mcnOptions = $this->getOptions();
-			$options = array(
-				array(	
-					"name" => __('General Settings', 'multilingual-comments-number'),
-					//"desc" => __('You must define IDs for both accounts, FeedBurner and Twitter, for properly work of plugin.', 'multilingual-comments-number'),
-					"disp" => "startSection" ),
-					
-				array(	
-					"name" => __("Define empty comments string", "multilingual-comments-number"),
-					"desc" => __("This is phrase for posts without comments.", 'multilingual-comments-number'),
-					"id" => "commentStringZero",
-					"disp" => "text",
-					"textLength" => '250'),
-					
-				array(	
-					"name" => __("Define one comment string", "multilingual-comments-number"),
-					"desc" => __("This is phrase for posts with one comment.", 'multilingual-comments-number'),
-					"id" => "commentStringOne",
-					"disp" => "text",
-					"textLength" => '250'),
-					
-				array(
-					"disp" => "endSection" )
-			);
-			
-			if (isset($_POST['update_multilingualCommentsNumberSettings'])) {
-				foreach ($options as $value) {
-					if (isset($_POST[$value['id']])) 
-						$mcnOptions[$value['id']] = $_POST[$value['id']];
-				}
-				update_option($this->adminOptionsName, $mcnOptions);
-				?>
-<div class="updated"><p><strong><?php _e("Multilingual Comments Number Settings Updated.", "multilingual-comments-number");?></strong></p></div>        
-				<?php
-			}
-			 ?>
-<div class=wrap>
-<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
-<div id="icon-options-general" class="icon32"></div>
-<h2><?php _e("Multilingual Comments Number Settings", "multilingual-comments-number"); ?></h2>
-
-			<?php foreach ($options as $value) {
-				switch ( $value['disp'] ) {
-					case 'startSection':
-						?>
-<div id="poststuff" class="ui-sortable">
-<div class="postbox opened">
-<h3><?php echo $value['name']; ?></h3>
-	<div class="inside">
-						<?php
-						if (!is_null($value['desc'])) echo '<p>'.$value['desc'].'</p>';
-						break;
-						
-					case 'endSection':
-						?>
-</div>
-</div>
-</div>
-						<?php
-						break;
-						
-					case 'text':
-						if ( is_null($value['textLength']) ) $textLengs = '55';
-						else $textLengs = $value['textLength'];
-						?>
-<p><strong><?php echo $value['name']; ?></strong>
-<br/><?php echo $value['desc']; ?></p>
-<p><input type="text" style="height: 22px; font-size: 11px; width: <?php echo $textLengs;?>px" value="<?php echo $mcnOptions[$value['id']] ?>" name="<?php echo $value['id'] ?>" id="<?php echo $value['id'] ?>" /></p>
-						<?php
-						break;
-						
-					case 'radio':
-						?>
-<p><strong><?php echo $value['name']; ?></strong>
-<br/><?php echo $value['desc']; ?></p><p>				
-						<?php
-						foreach ($value['options'] as $key => $option) { ?>
-<label for="<?php echo $value['id'].'_'.$key; ?>"><input type="radio" id="<?php echo $value['id'].'_'.$key; ?>" name="<?php echo $value['id']; ?>" value="<?php echo $key; ?>" <?php if ($mcnOptions[$value['id']] == $key) { echo 'checked="checked"'; }?> /> <?php echo $option;?></label>&nbsp;&nbsp;&nbsp;&nbsp;
-						<?php }
-						?>
-</p>			
-						<?php 
-						break;
-						
-					case 'select':
-						?>
-<p><strong><?php echo $value['name']; ?></strong>
-<br/><?php echo $value['desc']; ?></p>
-<p><select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
-						<?php foreach ($value['options'] as $option) { ?>
-<option value="<?php echo $option; ?>" <?php if ( $mcnOptions[$value['id']] == $option) { echo ' selected="selected"'; }?> ><?php echo $option; ?></option>
-						<?php } ?>
-</select></p>
-						<?php
-						break;
-					
-					default:
-						
-						break;
-				}
-			}
-			?>
-
-<div class="submit">
-	<input type="submit" class='button-primary' name="update_multilingualCommentsNumberSettings" value="<?php _e('Update Settings', 'multilingual-comments-number') ?>" />
-</div>
-</form>
-</div>      
-      <?php
+		function initSettings() {
+			add_settings_section("mcn_section", __("Comments Numbering", 'multilingual-comments-number'), array(&$this, "drawSection"), "discussion");
+			add_settings_field('mcnZeroString', __("Define empty comments string", "multilingual-comments-number"), array(&$this, 'drawZeroSetting'), 'discussion', 'mcn_section');
+			add_settings_field('mcnOneString', __("Define one comment string", "multilingual-comments-number"), array(&$this, 'drawOneSetting'), 'discussion', 'mcn_section');
+			register_setting('discussion','mcnZeroString');
+			register_setting('discussion','mcnOneString');
 		}
-				
+		
+		function drawSection() {
+			echo __('These are settings of Multilingual Comments Number plugin. Here you can define strings for one comment and absence of comments.', 'multilingual-comments-number');
+		}
+		
+		function drawZeroSetting() {
+			$option = get_option('mcnZeroString');
+			echo "<input type='text' class='regular-text' style='height: 22px; font-size: 11px; margin: 5px;' name='mcnZeroString' id='mcnZeroString' value='{$option}' />".
+						"<span class='description'>".__("This is phrase for posts without comments.", 'multilingual-comments-number')."</span>";
+		}
+		
+		function drawOneSetting() {
+			$option = get_option('mcnOneString');
+			echo "<input type='text' class='regular-text' style='height: 22px; font-size: 11px; margin: 5px;' name='mcnOneString' id='mcnOneString' value='{$option}' />".
+						"<span class='description'>".__("This is phrase for posts with one comment.", 'multilingual-comments-number')."</span>";
+		}
+
 		function commentsNumber( $output, $number ) {
 			$mcnOptions = $this->getOptions();
 			$text = strip_tags( $output );

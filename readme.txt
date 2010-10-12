@@ -1,10 +1,10 @@
 === Multilingual Comments Number ===
 Contributors: minimus
-Donate link: http://simplelib.co.cc/
+Donate link: http://www.simplelib.com/
 Tags: comments, comments_number
 Requires at least: 2.7
-Tested up to: 2.9.1
-Stable tag: 1.0.10
+Tested up to: 3.0.1
+Stable tag: 2.0.13
 
 This plugin corrects output of comments_number for languages having more than one form of plurals (All Slavic languages for example).
 
@@ -24,7 +24,7 @@ Available languages:
 
 If you have created your own language pack, or have an update of an existing one, you can send __.po__ and __.mo files__ to me so that I can bundle it into __Multilingual Comments Number__.
   
-More info you can see on the [plugin page](http://simplelib.co.cc/?p=128)
+More info you can see on the [plugin page](http://www.simplelib.com/?p=128)
 
 == Installation ==
 
@@ -55,6 +55,10 @@ resulting string after __Multilingual Comments Number__ filtering for ru_RU: `<a
 
 == Changelog ==
 
+= 2.0.13 =
+* Plugin Settings moved from Plugin Admin Page to Discussion Settings Page
+* Wordpress Settings API are used
+* Now the plugin codes are using __Wordpress 3.0+__ standards (PHP5 only) 
 = 1.0.10 =
 * 'No comments' and 'One comment' strings settings added
 * Admin page added
@@ -69,6 +73,10 @@ resulting string after __Multilingual Comments Number__ filtering for ru_RU: `<a
 
 == Upgrade Notice ==
 
+= 2.0.13 =
+Plugin Settings moved from Plugin Admin Page to Discussion Settings Page
+Wordpress Settings API are used
+Now the plugin codes are using __Wordpress 3.0+__ standards (PHP5 only)
 = 1.0.10 =
 'No comments' and 'One comment' strings settings added
 Admin page added
