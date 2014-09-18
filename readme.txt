@@ -3,8 +3,10 @@ Contributors: minimus
 Donate link: https://load.payoneer.com/LoadToPage.aspx?email=minimus@simplelib.com
 Tags: comments, comments_number
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 2.0.14
+Tested up to: 4.0
+Stable tag: 2.0.15
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 This plugin corrects output of comments_number for languages having more than one form of plurals (All Slavic languages for example).
 
@@ -55,6 +57,8 @@ resulting string after __Multilingual Comments Number__ filtering for ru_RU: `<a
 
 == Changelog ==
 
+= 2.0.15 =
+* Wordpress 4.0 compatibility
 = 2.0.14 =
 * Some changes
 = 2.0.13 =
@@ -75,6 +79,8 @@ resulting string after __Multilingual Comments Number__ filtering for ru_RU: `<a
 
 == Upgrade Notice ==
 
+= 2.0.15 =
+Wordpress 4.0 compatibility
 = 2.0.14 =
 Some changes
 = 2.0.13 =
