@@ -3,8 +3,8 @@ Contributors: minimus
 Donate link: https://load.payoneer.com/LoadToPage.aspx?email=minimus@simplelib.com
 Tags: comments, comments_number
 Requires at least: 3.0
-Tested up to: 4.0
-Stable tag: 2.0.15
+Tested up to: 4.2
+Stable tag: 2.0.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,6 +57,8 @@ resulting string after __Multilingual Comments Number__ filtering for ru_RU: `<a
 
 == Changelog ==
 
+= 2.0.16 =
+* Wordpress 4.2 compatibility
 = 2.0.15 =
 * Wordpress 4.0 compatibility
 = 2.0.14 =
@@ -79,6 +81,8 @@ resulting string after __Multilingual Comments Number__ filtering for ru_RU: `<a
 
 == Upgrade Notice ==
 
+= 2.0.16 =
+Wordpress 4.2 compatibility.
 = 2.0.15 =
 Wordpress 4.0 compatibility
 = 2.0.14 =

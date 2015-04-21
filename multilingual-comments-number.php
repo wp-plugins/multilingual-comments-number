@@ -3,7 +3,7 @@
 Plugin Name: Multilingual Comments Number
 Plugin URI: http://www.simplelib.com/?p=128
 Description: Adds correct multilingual comments numbering to wordpress blog. Visit <a href="http://www.simplelib.com/">SimpleLib blog</a> for more details.
-Version: 2.0.15
+Version: 2.0.16
 Author: minimus
 Author URI: http://blogcoding.ru
 */
